@@ -1,6 +1,5 @@
 package converter;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -31,7 +30,6 @@ public class ConverterController {
 	@FXML
 	public void initialize() {
 		// This is for testing
-		System.out.println("Running initialize");
 		if(combobox1 != null) {
 			combobox1.getItems().addAll(Length.values());
 			combobox1.getSelectionModel().select(0); // select an item to show
@@ -54,19 +52,25 @@ public class ConverterController {
 		Length box1 = combobox1.getValue();
 		Length box2 = combobox2.getValue();
 		// perform the conversion and output the result	
-		if(!text1.equals("")) {
-			double n1 = Double.parseDouble(text1);
-			System.out.printf("handleConvert converting from %s to %s.\n",box1,box2);
-			result = (n1 * box1.getValue()) / box2.getValue();
-			textfield2.setText(""+result);
-		}
-		else if(!text2.equals("")) {
-			double n2 = Double.parseDouble(text2);
-			System.out.printf("handleConvert converting from %s to %s.\n",box2,box1);
-			result = (n2 * combobox2.getValue().getValue()) / combobox1.getValue().getValue();
-			textfield1.setText(""+result);
-		}
+		try {
+			if(!text1.equals("")) {
+				double n1 = Double.parseDouble(text1);
+				result = (n1 * box1.getValue()) / box2.getValue();
+				textfield2.setText(String.format("%.4g", result));
+			}
+			else if(!text2.equals("")) {
+				double n2 = Double.parseDouble(text2);
+				result = (n2 * combobox2.getValue().getValue()) / combobox1.getValue().getValue();
+				textfield1.setText(String.format("%.4g", result));
+			}
+		} catch (Exception e) {
+			textfield1.setStyle("-fx-text-fill : red");
+			textfield2.setStyle("-fx-text-fill : red");
+			textfield1.setText("ERROR");
+			textfield2.setText("ERROR");
 			
+		}
+	
 	}
 	
 	public void convertOnEnter(KeyEvent event) {
@@ -78,9 +82,10 @@ public class ConverterController {
 	/**
 	 * Clear the box
 	 */
-	public void handleClear(ActionEvent event) {
+	public void handleClear() {
+		textfield1.setStyle("-fx-text-fill : black");
+		textfield2.setStyle("-fx-text-fill : black");
 		textfield1.setText("");
 		textfield2.setText("");
-		System.out.println("Clear!!");
 	}
 }
