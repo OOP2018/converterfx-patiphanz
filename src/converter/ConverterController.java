@@ -53,12 +53,12 @@ public class ConverterController {
 		Length box2 = combobox2.getValue();
 		// perform the conversion and output the result	
 		try {
-			if(!text1.equals("")) {
+			if(!text1.equals("") && text2.equals("") || textfield1.isFocused()) {
 				double n1 = Double.parseDouble(text1);
 				result = (n1 * box1.getValue()) / box2.getValue();
 				textfield2.setText(String.format("%.4g", result));
 			}
-			else if(!text2.equals("")) {
+			else if(!text2.equals("") && text1.equals("") || textfield2.isFocused()) {
 				double n2 = Double.parseDouble(text2);
 				result = (n2 * combobox2.getValue().getValue()) / combobox1.getValue().getValue();
 				textfield1.setText(String.format("%.4g", result));
