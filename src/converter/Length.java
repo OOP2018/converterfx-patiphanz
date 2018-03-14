@@ -3,7 +3,7 @@ package converter;
 public enum Length {
 	METER(1.0),
 	CENTIMETER(0.01),
-	KILOMETE(1000),
+	KILOMETER(1000),
 	MILE(1609.344),
 	FOOT(0.3048),
 	WA(2.0),
