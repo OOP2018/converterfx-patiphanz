@@ -66,8 +66,8 @@ public class ConverterController {
 		} catch (Exception e) {
 			textfield1.setStyle("-fx-text-fill : red");
 			textfield2.setStyle("-fx-text-fill : red");
-			textfield1.setText("ERROR");
-			textfield2.setText("ERROR");
+			textfield1.setText("INSERT NUMBER ONLY");
+			textfield2.setText("INSERT NUMBER ONLY");
 			
 		}
 	
